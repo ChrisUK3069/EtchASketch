@@ -11,46 +11,63 @@
 
 console.log("Hello World");
 
-let gridSize = 17;
-let cellSize = 17;
+let gridSize = 0;
+let cellSize = 90;
 let midDiv = "";
+let validInput = false;
 
 
 // CREATE NEW GRID LOOP TO POPULATE WITH DIVS
 document.querySelector("#btnCreateGrid").addEventListener("click", function(){
-    newGrid(gridSize);
+    newGrid();
 });
 
-function newGrid(gridSize) {
 
-    if (midDiv) {
+function newGrid(gridSize) {
+    validInput = false
+    gridSize = prompt("Please enter number (lgnth/wdth: ");
+    gridSize = parseInt(gridSize);
+    while (validInput == false) {
+        if (gridSize < 0 || gridSize > 100){
+            alert("Invalid amount, enter a number over 0 and less than 100.");
+            validInput = false;
+            break;
+        }
+
+
+        cellSize = 960 / gridSize;
+
+        if (midDiv) {
         midDiv.remove();
         midDiv = "";
-    }
-
-    console.log(gridSize);
-    midDiv = document.createElement("div");
-    midDiv.classList.add("midDiv");
-    container.appendChild(midDiv);
-
-
-    for (let i = 1; i < gridSize; i++) {
-       const div = document.createElement("div");
-      div.id = "hz";
-      div.classList.add("div" + i);
-      div.textContent = "gr" + i;
-      midDiv.appendChild(div);
-
-      for (let j = 1; j < gridSize; j++) {
-          const hDiv = document.createElement("div");
-          hDiv.classList.add("vt" + j);
-          hDiv.id = "hDiv";
-          hDiv.textContent = "hDiv: " + j;
-          hDiv.style.width = "30px";
-          hDiv.style.height = "30px";
-         div.appendChild(hDiv);
-         hDiv.onmouseover = hDiv.onmouseout = handler;
         }
+
+        console.log(gridSize);
+        midDiv = document.createElement("div");
+        midDiv.classList.add("midDiv");
+        container.appendChild(midDiv);
+
+
+        for (let i = 0; i < gridSize; i++) {
+         const div = document.createElement("div");
+        div.id = "hz";
+        div.classList.add("div" + i);
+        //div.textContent = "gr" + i;
+        midDiv.appendChild(div);
+
+            for (let j = 0; j < gridSize; j++) {
+             const hDiv = document.createElement("div");
+              hDiv.classList.add("vt" + j);
+                 hDiv.id = "hDiv";
+                 //hDiv.textContent = "hDiv: " + j;
+                 hDiv.style.width = cellSize + "px";
+              hDiv.style.height = cellSize + "px";
+              div.appendChild(hDiv);
+             hDiv.onmouseover = hDiv.onmouseout = handler;
+            }
+        }
+        validInput = true;
+        break;
     }
 }
 
@@ -62,10 +79,10 @@ function newGrid(gridSize) {
 // COLORS DIVS ON BOARD
 function handler(event) {
     if (event.type == "mouseover") {
-        event.target.style.background = "blue"
+        event.target.style.background = "black"
     }
     if (event.type == "mouseout") {
-        event.target.style.background = "blue"
+        event.target.style.background = "black"
     }
 }
 
