@@ -15,6 +15,9 @@ let gridSize = 0;
 let cellSize = 90;
 let midDiv = "";
 let validInput = false;
+let red = 0;
+let green = 0;
+let blue = 0;
 
 
 // CREATE NEW GRID LOOP TO POPULATE WITH DIVS
@@ -24,6 +27,12 @@ document.querySelector("#btnCreateGrid").addEventListener("click", function(){
 
 
 function newGrid(gridSize) {
+
+    //red = Math.floor(Math.random() * 256);
+    //green = Math.floor(Math.random() * 256);
+    //blue = Math.floor(Math.random() * 256);
+    console.log(red + " " + green + " " + blue);
+
     validInput = false
     gridSize = prompt("Please enter number (lgnth/wdth: ");
     gridSize = parseInt(gridSize);
@@ -78,11 +87,16 @@ function newGrid(gridSize) {
 
 // COLORS DIVS ON BOARD
 function handler(event) {
+
+    red = Math.floor(Math.random() * 256);
+    green = Math.floor(Math.random() * 256);
+    blue = Math.floor(Math.random() * 256);
+
     if (event.type == "mouseover") {
-        event.target.style.background = "black"
+        event.target.style.background =  "rgb("+red+","+green+","+blue+")";
     }
     if (event.type == "mouseout") {
-        event.target.style.background = "black"
+        event.target.style.background =  "rgb("+red+","+green+","+blue+")";
     }
 }
 
