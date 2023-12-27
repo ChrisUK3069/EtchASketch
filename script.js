@@ -13,28 +13,48 @@ console.log("Hello World");
 
 let gridSize = 17;
 let cellSize = 17;
+let midDiv = "";
 
 
 // CREATE NEW GRID LOOP TO POPULATE WITH DIVS
+document.querySelector("#btnCreateGrid").addEventListener("click", function(){
+    newGrid(gridSize);
+});
+
 function newGrid(gridSize) {
+
+    if (midDiv) {
+        midDiv.remove();
+        midDiv = "";
+    }
+
     console.log(gridSize);
+    midDiv = document.createElement("div");
+    midDiv.classList.add("midDiv");
+    container.appendChild(midDiv);
+
+
     for (let i = 1; i < gridSize; i++) {
        const div = document.createElement("div");
       div.id = "hz";
+      div.classList.add("div" + i);
       div.textContent = "gr" + i;
-      document.getElementById("container").appendChild(div);
+      midDiv.appendChild(div);
 
       for (let j = 1; j < gridSize; j++) {
           const hDiv = document.createElement("div");
-          hDiv.classList.add("vt");
+          hDiv.classList.add("vt" + j);
+          hDiv.id = "hDiv";
           hDiv.textContent = "hDiv: " + j;
+          hDiv.style.width = "30px";
+          hDiv.style.height = "30px";
          div.appendChild(hDiv);
          hDiv.onmouseover = hDiv.onmouseout = handler;
         }
     }
 }
 
-newGrid(gridSize);
+
 
 
 
