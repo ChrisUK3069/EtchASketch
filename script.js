@@ -15,9 +15,11 @@ let gridSize = 0;
 let cellSize = 90;
 let midDiv = "";
 let validInput = false;
-let red = 0;
-let green = 0;
-let blue = 0;
+//let red = 0;
+//let green = 0;
+//let blue = 0;
+let hue = 0;
+let cellNum = 0;
 
 
 // CREATE NEW GRID LOOP TO POPULATE WITH DIVS
@@ -31,7 +33,7 @@ function newGrid(gridSize) {
     //red = Math.floor(Math.random() * 256);
     //green = Math.floor(Math.random() * 256);
     //blue = Math.floor(Math.random() * 256);
-    console.log(red + " " + green + " " + blue);
+    console.log(hue);
 
     validInput = false
     gridSize = prompt("Please enter number (lgnth/wdth: ");
@@ -66,8 +68,10 @@ function newGrid(gridSize) {
 
             for (let j = 0; j < gridSize; j++) {
              const hDiv = document.createElement("div");
-              hDiv.classList.add("vt" + j);
+             cellNum = cellNum + 1;
+              hDiv.classList.add("vt" + cellNum);
                  hDiv.id = "hDiv";
+                 
                  //hDiv.textContent = "hDiv: " + j;
                  hDiv.style.width = cellSize + "px";
               hDiv.style.height = cellSize + "px";
@@ -88,15 +92,18 @@ function newGrid(gridSize) {
 // COLORS DIVS ON BOARD
 function handler(event) {
 
-    red = Math.floor(Math.random() * 256);
-    green = Math.floor(Math.random() * 256);
-    blue = Math.floor(Math.random() * 256);
+    //red = Math.floor(Math.random() * 256);
+    //green = Math.floor(Math.random() * 256);
+    //blue = Math.floor(Math.random() * 256);
+    // BACKUP event.target.style.background =  "rgb("+red+","+green+","+blue+")";
+    hue = Math.floor(Math.random() * 360);
+
 
     if (event.type == "mouseover") {
-        event.target.style.background =  "rgb("+red+","+green+","+blue+")";
+        event.target.style.background =  "hsl("+hue+",100%,,50%)"
     }
     if (event.type == "mouseout") {
-        event.target.style.background =  "rgb("+red+","+green+","+blue+")";
+        event.target.style.background =  "hsl("+hue+",100%,,50%)"
     }
 }
 
